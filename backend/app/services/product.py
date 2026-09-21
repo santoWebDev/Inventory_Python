@@ -12,8 +12,8 @@ class ProductService:
     @staticmethod
     def create(db,data):
         if db.scalar(select(Product).where(func.lower(Product.name)==data.name.strip().lower())): raise AppException("Product already exists",409)
-        ProductService._validate_refs(db,data.category,data.supplier)
-        obj=Product(name=data.name.strip(),description=data.description.strip(),price=data.price,category_id=data.category,supplier_id=data.supplier,stock=data.stock,low_stock_threshold=data.lowStockThreshold,status=data.status)
+        ProductService._validate_refs(db,data.category_id,data.supplier_id)
+        obj=Product(name=data.name.strip(),description=data.description.strip(),price=data.price,category_id=data.category_id,supplier_id=data.supplier_id,stock=data.stock,low_stock_threshold=data.low_stock_threshold,status=data.status)
         db.add(obj); db.commit(); db.refresh(obj); return product_payload(obj)
     @staticmethod
     def get_all(db,search=None,category=None,status=None,page=1,limit=10):
