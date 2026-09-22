@@ -13,5 +13,9 @@ async def app_exception_handler(request: Request, exc: AppException):
 async def validation_exception_handler(request: Request, exc):
     return JSONResponse(
         status_code=422,
-        content={"success": False, "message": "Validation failed", "errors": exc.errors()},
+        content={
+            "success": False,
+            "message": "Validation failed",
+            "errors": exc.errors(),
+        },
     )

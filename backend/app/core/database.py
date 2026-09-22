@@ -3,12 +3,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
 from .config import settings
 
-
-engine = create_engine(settings.DATABASE_URL.replace(
-        "postgresql://",
-        "postgresql+psycopg://",
-        1
-    ), pool_pre_ping=True)
+engine = create_engine(
+    settings.DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1),
+    pool_pre_ping=True,
+)
 SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 

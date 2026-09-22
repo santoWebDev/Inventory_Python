@@ -11,6 +11,10 @@ class Supplier(Base):
     email: Mapped[str] = mapped_column(String(160), unique=True)
     number: Mapped[str] = mapped_column(String(40), unique=True)
     status: Mapped[str] = mapped_column(String(20), default="active", index=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
     products = relationship("Product", back_populates="supplier")

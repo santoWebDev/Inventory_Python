@@ -15,9 +15,15 @@ class Product(Base):
     stock: Mapped[int] = mapped_column(Integer, default=0)
     status: Mapped[str] = mapped_column(String(20), default="active", index=True)
     low_stock_threshold: Mapped[int] = mapped_column(Integer, default=10)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now()
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
     category = relationship("Category", back_populates="products")
     supplier = relationship("Supplier", back_populates="products")
-    inventory_transactions = relationship("InventoryTransaction", back_populates="product")
+    inventory_transactions = relationship(
+        "InventoryTransaction", back_populates="product"
+    )
     order_items = relationship("OrderItem", back_populates="product")

@@ -16,6 +16,8 @@ class InventoryTransaction(Base):
     reference_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
     reference_type: Mapped[str] = mapped_column(String(20), default="MANUAL")
     performed_by_id: Mapped[int] = mapped_column(ForeignKey("users.id"), index=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), index=True)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), index=True
+    )
     product = relationship("Product", back_populates="inventory_transactions")
     performed_by = relationship("User", back_populates="inventory_transactions")
