@@ -42,7 +42,7 @@ class ProductService:
             if search:
                 q = q.where(Product.name.ilike(f"%{search}%"))
             if category:
-                q = q.where(Product.category_id == int(category_id))
+                q = q.where(Product.category_id == int(category))
             if status:
                 q = q.where(Product.status == status)
             all_items = list(db.scalars(q).all())
