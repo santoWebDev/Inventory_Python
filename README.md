@@ -1,37 +1,64 @@
-# Inventory Management System - Python Full Stack
+# Inventory Management System
 
-This project is a Python full-stack conversion of the supplied MERN inventory project.
+A full-stack Inventory Management System built using React, FastAPI, SQLAlchemy, and PostgreSQL.
 
-## Stack
-- Frontend: React, Vite, Tailwind CSS, Axios
-- Backend: FastAPI, SQLAlchemy 2.0, Pydantic
-- Database: PostgreSQL (`inventory_db`)
-- Auth: JWT + bcrypt
+The application allows authenticated users to manage products, categories, suppliers, inventory stock, orders, users, and reports through a responsive web interface.
 
-## Backend architecture
+---
 
-```text
-backend/app/
-├── models/       # database tables
-├── schemas/      # request/response validation
-├── services/     # BUSINESS LOGIC
-├── routes/       # HTTP ONLY
-├── exceptions/   # custom errors + global handler
-├── core/         # database + config
-└── main.py
-```
+## Features
 
-`dashboard.py` and `report.py` are supporting service/route modules required to preserve the dashboard/report flow present in the supplied MERN application. Customers and Logistics were added as first-class modules.
+- User registration and login
+- JWT-based authentication
+- Role-based access control
+- Admin and Employee roles
+- Product management
+- Category management
+- Supplier management
+- Stock IN
+- Stock OUT
+- Stock adjustment
+- Inventory transaction history
+- Order creation and management
+- Order status management
+- Order cancellation and stock restoration
+- Low-stock tracking
+- Dashboard statistics
+- Inventory reports
+- Responsive UI
+- PostgreSQL database
 
-## Important business-logic examples
+---
 
-- `services/category.py` -> duplicate name checks, update rules, product-aware soft delete.
-- `services/product.py` -> duplicate checks, category/supplier validation, product update rules.
-- `services/inventory.py` -> stock-in/out/adjustment calculations and inventory transaction creation.
-- `services/order.py` -> order total calculation, stock validation, stock deduction, cancellation/restocking.
-- `services/customer.py` -> customer duplicate validation and status handling.
-- `services/logistics.py` -> shipment creation and tracking status timestamps.
+## Technology Stack
 
-Routes deliberately do not contain these rules; they call the service methods.
+### Frontend
 
-See `backend/README.md` for the exact PostgreSQL/pgAdmin startup steps.
+- React.js
+- Vite
+- Tailwind CSS
+- Axios
+- React Router
+- JavaScript
+
+### Backend
+
+- Python
+- FastAPI
+- SQLAlchemy 2.0
+- Pydantic
+- JWT Authentication
+- Password Hashing
+
+### Database
+
+- PostgreSQL
+- pgAdmin
+
+### Deployment
+
+- Frontend: Vercel
+- Backend: Render
+- Database: Render PostgreSQL
+
+---
