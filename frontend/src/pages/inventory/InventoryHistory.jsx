@@ -86,14 +86,14 @@ const InventoryHistory = () => {
                 data.map((t) => (
                   <tr key={t._id} className="border-t border-slate-100 transition hover:bg-slate-50/70">
                     <td className="px-4 py-3">
-                      {new Date(t.createdAt).toLocaleString()}
+                      {new Date(t.created_at).toLocaleString()}
                     </td>
                     <td className="px-4 py-3 font-semibold">{t.type}</td>
                     <td className="px-4 py-3">{t.quantity}</td>
-                    <td className="px-4 py-3">{t.previousStock}</td>
-                    <td className="px-4 py-3">{t.newStock}</td>
+                    <td className="px-4 py-3">{t.previous_stock}</td>
+                    <td className="px-4 py-3">{t.new_stock}</td>
                     <td className="px-4 py-3">{t.reason}</td>
-                    <td className="px-4 py-3">{t.performedBy?.name || "-"}</td>
+                    <td className="px-4 py-3">{t.performed_by?.name || "-"}</td>
                   </tr>
                 ))
               ) : (

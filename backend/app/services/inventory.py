@@ -3,6 +3,7 @@ from ..exceptions.app_exception import AppException
 from ..models.product import Product
 from ..models.inventory import InventoryTransaction
 from .helpers import entity_or_404, product_payload
+from sqlalchemy.orm import joinedload
 
 
 class InventoryService:
@@ -75,6 +76,9 @@ class InventoryService:
     def history(db, product_id, page=1, limit=20):
         q = (
             select(InventoryTransaction)
+            .options(
+                joinedload(InventoryTransaction.performed_by)
+                )
             .where(InventoryTransaction.product_id == product_id)
             .order_by(InventoryTransaction.created_at.desc())
         )
