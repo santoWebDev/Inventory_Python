@@ -92,7 +92,7 @@ const OrderDetails = () => {
             </span>
           </div>
           <p className="mt-1 text-sm text-slate-500">
-            {new Date(order.createdAt).toLocaleString()}
+            {new Date(order.created_at).toLocaleString()}
           </p>
         </div>
 
@@ -134,7 +134,7 @@ const OrderDetails = () => {
           <div className="flex items-center justify-between border-t border-slate-200 px-6 py-5">
             <span className="font-semibold text-slate-600">Total</span>
             <span className="text-xl font-bold text-slate-900">
-              ₹{Number(order.totalAmount).toLocaleString("en-IN")}
+              ₹{Number(order.total_amount).toLocaleString("en-IN")}
             </span>
           </div>
         </div>

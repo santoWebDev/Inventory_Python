@@ -112,7 +112,7 @@ const Orders = () => {
               <tr>
                 {[
                   "Order",
-                  "Customer",
+                  "Created by ",
                   "Items",
                   "Total",
                   "Status",
@@ -128,19 +128,19 @@ const Orders = () => {
             <tbody>
               {orders.map((o) => (
                 <tr key={o._id} className="border-t border-slate-100 transition hover:bg-slate-50/70">
-                  <td className="px-4 py-3 font-semibold">{o.orderNumber}</td>
+                  <td className="px-4 py-3 font-semibold">{o.order_number}</td>
                   <td className="px-4 py-3">{o.user?.name || "-"}</td>
                   <td className="px-4 py-3">{o.items?.length || 0}</td>
                   <td className="px-4 py-3">
-                    ₹{Number(o.totalAmount).toLocaleString("en-IN")}
+                    ₹{Number(o.total_amount).toLocaleString("en-IN")}
                   </td>
                   <td className="px-4 py-3 capitalize">{o.status}</td>
                   <td className="px-4 py-3">
-                    {new Date(o.createdAt).toLocaleDateString()}
+                    {new Date(o.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-4 py-3 align-middle">
                     <Link
-                      to={`/orders/${o._id}`}
+                      to={`/orders/${o.id}`}
                       className="inline-flex h-9 min-w-16 items-center justify-center rounded-lg border border-indigo-100 bg-indigo-50 px-3 text-sm font-semibold text-indigo-700 transition hover:bg-indigo-100"
                     >
                       View
@@ -171,7 +171,7 @@ const Orders = () => {
               >
                 <option value="">Select product</option>
                 {products.map((p) => (
-                  <option key={p._id} value={p._id}>
+                  <option key={p.id} value={p.id}>
                     {p.name} — stock {p.stock}
                   </option>
                 ))}
