@@ -86,7 +86,7 @@ const Categories = () => {
 
     try {
       if (editing) {
-        await updateCategory(editing._id, form);
+        await updateCategory(editing.id, form);
       } else {
         await createCategory(form);
       }
@@ -213,7 +213,7 @@ const Categories = () => {
 
             <tbody>
               {categories.map((category) => (
-                <tr key={category._id} className="border-t border-slate-100 transition hover:bg-slate-50/70">
+                <tr key={category.id} className="border-t border-slate-100 transition hover:bg-slate-50/70">
                   <td className="px-4 py-3 font-semibold">{category.name}</td>
 
                   <td className="px-4 py-3">{category.description || "-"}</td>
@@ -232,7 +232,7 @@ const Categories = () => {
 
                         <Button
                           variant="danger"
-                          onClick={() => remove(category._id)}
+                          onClick={() => remove(category.id)}
                         >
                           Delete
                         </Button>

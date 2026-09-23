@@ -89,7 +89,7 @@ const Products = () => {
       };
       if (editing) {
         delete data.stock;
-        await updateProduct(editing._id, data);
+        await updateProduct(editing.id, data);
       } else await createProduct(data);
       setModal(false);
       setEditing(null);
@@ -357,7 +357,7 @@ const Products = () => {
             className="w-full min-w-0 rounded-lg border px-4 py-2.5"
             placeholder="Low stock threshold"
             value={form.low_stock_threshold}
-            onChange={(e) => set("lowStockThreshold", e.target.value)}
+            onChange={(e) => set("low_stock_threshold", e.target.value)}
           />
           <select
             className="w-full min-w-0 rounded-lg border px-4 py-2.5"
