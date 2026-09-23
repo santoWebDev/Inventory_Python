@@ -36,19 +36,19 @@ class ProductService:
         db.refresh(obj)
         return product_payload(obj)
 
-    @staticmethod
-    def get_all(db, search=None, category=None, status=None, page=1, limit=10):
-        q = select(Product).order_by(Product.created_at.desc())
-        if search:
-            q = q.where(Product.name.ilike(f"%{search}%"))
-        if category:
-            q = q.where(Product.category_id == int(category))
-        if status:
-            q = q.where(Product.status == status)
-        all_items = list(db.scalars(q).all())
-        total = len(all_items)
-        start = (page - 1) * limit
-        return [product_payload(x) for x in all_items[start : start + limit]], total
+        @staticmethod
+        def get_all(db, search=None, category=None, status=None, page=1, limit=10):
+            q = select(Product).order_by(Product.created_at.desc())
+            if search:
+                q = q.where(Product.name.ilike(f"%{search}%"))
+            if category:
+                q = q.where(Product.category.id == int(category))
+            if status:
+                q = q.where(Product.status == status)
+            all_items = list(db.scalars(q).all())
+            total = len(all_items)
+            start = (page - 1) * limit
+            return [product_payload(x) for x in all_items[start : start + limit]], total
 
     @staticmethod
     def get_by_id(db, id):
