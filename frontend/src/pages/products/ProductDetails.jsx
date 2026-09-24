@@ -7,23 +7,53 @@ import Modal from "../../components/Modal";
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
 import ErrorMessage from "../../components/ErrorMessage";
+import { getCategories } from "../../api/categoryApi";
+import { getSuppliers } from "../../api/supplierApi";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAdmin, isEmployee } = useAuth();
-  const [product, setProduct] = useState(null),
-    [loading, setLoading] = useState(true),
-    [error, setError] = useState(""),
-    [modal, setModal] = useState(null),
-    [saving, setSaving] = useState(false),
-    [form, setForm] = useState({ quantity: "", newStock: "", reason: "" });
+
+  const [product, setProduct] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [modal, setModal] = useState(null);
+  const [saving, setSaving] = useState(false);
+
+  const [form, setForm] = useState({
+    quantity: "",
+    newStock: "",
+    reason: "",
+  });
   const load = async () => {
     setLoading(true);
+    setError("");
+
     try {
-      const r = await getProduct(id);
-      setProduct(r.data);
+      const productResponse = await getProduct(id);
+
+      setProduct(productResponse.data);
+
+      // Load categories and suppliers separately
+      try {
+        const categoryResponse = await getCategories();
+        setCategories(categoryResponse.data || []);
+      } catch (e) {
+        console.error("Failed to load categories:", e);
+      }
+
+      try {
+        const supplierResponse = await getSuppliers();
+        setSuppliers(supplierResponse.data || []);
+      } catch (e) {
+        console.error("Failed to load suppliers:", e);
+      }
     } catch (e) {
+      console.error("Product loading error:", e);
       setError(e.response?.data?.message || "Failed to load product");
     } finally {
       setLoading(false);
@@ -92,11 +122,15 @@ const ProductDetails = () => {
         </div>
         <div className="rounded-xl bg-white p-5 shadow-sm">
           <p className="text-sm text-slate-500">Category</p>
-          <p className="mt-2 font-semibold">{product.category?.name || "-"}</p>
+          <p className="mt-2 font-semibold">
+            {categories.find((c) => c.id === product.category_id)?.name || "-"}
+          </p>
         </div>
         <div className="rounded-xl bg-white p-5 shadow-sm">
           <p className="text-sm text-slate-500">Supplier</p>
-          <p className="mt-2 font-semibold">{product.supplier?.name || "-"}</p>
+          <p className="mt-2 font-semibold">
+            {suppliers.find((s) => s.id === product.supplier_id)?.name || "-"}
+          </p>
         </div>
       </div>
       <div className="rounded-xl bg-white p-6 shadow-sm">
