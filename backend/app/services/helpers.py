@@ -7,7 +7,7 @@ from ..models.product import Product
 def entity_or_404(db: Session, model, entity_id: int, label: str):
     obj = db.get(model, entity_id)
     if not obj:
-        raise AppException(f"{label} not found", 404)
+        raise AppException(f"{label} not found", 404)  
     return obj
 
 
